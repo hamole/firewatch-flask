@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>Latrobe Valley Firewatch Dashboard</title>
+  <head>
+  <body>
+    <h1>Fire Danger Forecast</h1>
+    {% for day, forecast in danger_forecast.iteritems() %}
+    <p><b>{{forecast.short_date}}: </b>{{forecast.rating}}</p>
+    {% endfor %}
+  </body>
+</html>
+
+    
