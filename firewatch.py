@@ -24,7 +24,13 @@ def main(postcode):
     roads_municipality = 'latrobe'
   else:
     return "Sorry, dashboard only for Latrobe Valley at this time"
-  return render_template("index.html",danger_forecast = OrderedDict(sorted(danger_rating(cfa_district).items())))
+  forecast = OrderedDict(sorted(danger_rating(cfa_district).items()))
+  today_date, today_conditions  = forecast.popitem(last=False)
+  return render_template("index.html",
+    danger_forecast = forecast,
+    today = today_conditions,
+    woeid = '12510711',
+    temperature_unit = 'c')
 
 def danger_rating(district):
   r = requests.get('http://www.cfa.vic.gov.au/restrictions/%s-firedistrict_rss.xml' % district)# XML feed file/URL
@@ -35,8 +41,8 @@ def danger_rating(district):
       continue
     date = dateutil.parser.parse(day.find('title').text, fuzzy = True).date()
     short_date = day.find('title').text.split(',',1)[0]
-    danger = get_danger(day.find('description').text, district)
-    danger_forecast[date] = {'rating':danger,'short_date':short_date}
+    dangercode, danger = get_danger(day.find('description').text, district)
+    danger_forecast[date] = {'ratingcode': dangercode,'rating':danger,'short_date':short_date}
   return danger_forecast
 
 def get_danger(text, district):
@@ -57,7 +63,7 @@ def get_danger(text, district):
     if district in image['src']:
       rating = image['src'].split('/')[-1].split('.')[0]
   if rating:
-    return ratings[rating]
+    return (rating, ratings[rating])
   else:
-    return 'Error Getting Forecast'
+    return ('error','Error Getting Forecast')
 
