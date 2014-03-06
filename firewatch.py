@@ -1,11 +1,9 @@
-import os, requests, re
+import os, requests, re, dateutil.parser, sqlite3
 import xml.etree.ElementTree as ET
-import dateutil.parser 
 from flask import Flask, render_template
 from werkzeug.routing import BaseConverter
 from bs4 import BeautifulSoup
 from collections import OrderedDict
-
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -14,23 +12,27 @@ class RegexConverter(BaseConverter):
     super(RegexConverter, self).__init__(url_map)
     self.regex = items[0]
 
+utf8_parser = ET.XMLParser(encoding='utf-8')
+
 app.url_map.converters['regex'] = RegexConverter
 
 @app.route('/<regex("[0-9]{4}"):postcode>/')
 def main(postcode):
-  if postcode in ['3825','3840','3842','3869','3870']:
-    cfa_district = 'westandsouthgippsland'
-    roads_region = 'gippsland'
-    roads_municipality = 'latrobe'
+  conn = sqlite3.connect('postcodes.sqlite')
+  conn.row_factory = sqlite3.Row #Return rows as dicts
+  c = conn.cursor()
+  c.execute("SELECT * from postcodes WHERE postcode = %s"%postcode)
+  result = c.fetchone()
+  if result is None:
+    return "Sorry, postcode not supported or not found"
   else:
-    return "Sorry, dashboard only for Latrobe Valley at this time"
-  forecast = OrderedDict(sorted(danger_rating(cfa_district).items()))
-  today_date, today_conditions  = forecast.popitem(last=False)
-  return render_template("index.html",
-    danger_forecast = forecast,
-    today = today_conditions,
-    woeid = '12510711',
-    temperature_unit = 'c')
+    forecast = OrderedDict(sorted(danger_rating(result['cfa_district_url']).items()))
+    today_date, today_conditions  = forecast.popitem(last=False)
+    return render_template("index.html",
+      danger_forecast = forecast,
+      today = today_conditions,
+      data = result,
+      temperature_unit = 'c')
 
 def danger_rating(district):
   r = requests.get('http://www.cfa.vic.gov.au/restrictions/%s-firedistrict_rss.xml' % district)# XML feed file/URL

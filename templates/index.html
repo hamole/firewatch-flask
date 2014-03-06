@@ -19,7 +19,7 @@
           <div class="weather_forecast"></div>
           <script>
             jQuery.simpleWeather({
-              woeid: '{{ woeid }}',
+              woeid: '{{ data.woeid }}',
               unit: '{{ temperature_unit }}',
               location: '',
               zipcode: '',
@@ -72,7 +72,7 @@
     <div class="row cfa-buttons">
       <div class="col six">
         <div>
-          <a class="widget-box button-style vic-roads" target="_blank" href="http://alerts.vicroads.vic.gov.au/melbourne-metropolitan/nillumbik">
+          <a class="widget-box button-style vic-roads" target="_blank" href="http://alerts.vicroads.vic.gov.au{{ data.vicroads}}">
             <div class="col six button-bg">&nbsp;</div>
             <div class="col six button-content">Closures &amp; <br>Traffic Alerts</div>
             <div class="clear"></div>

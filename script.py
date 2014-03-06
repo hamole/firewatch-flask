@@ -111,7 +111,7 @@ with open('LocalityFinder.csv','rU') as csvfile:
     for district, councils in cfa_districts.items():
       if council in councils:
         cfa_district = district
-        cfa_district_url = cfa_district.lower().strip(' ')
+        cfa_district_url = "".join(cfa_district.lower().split())
     if postcode not in seen_postcodes:
       query = "INSERT INTO postcodes VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')"%(postcode,cfa_district,lat_longs[postcode]['woeid'],council,lat_longs[postcode]['latitude'],lat_longs[postcode]['longitude'],url,cfa_district_url)
       c.execute(query)
