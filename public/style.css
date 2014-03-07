@@ -1,0 +1,106 @@
+/* Resets */
+.fw-wrapper, .fw-wrapper * { margin:0; padding:0; margin:0; border:0; vertical-align:baseline; }
+.fw-wrapper .row { margin:0; }
+
+/* Clearfix */
+.fw-wrapper .clear:before, .fw-wrapper .clear:after, .fw-wrapper .row:before, .fw-wrapper .row:after { content:""; display:table; }
+.fw-wrapper .clear:after, .fw-wrapper .row:after { clear:both; }
+.fw-wrapper .clear, .fw-wrapper .row { zoom:1; }
+
+/* Common Classes */
+.fw-wrapper .left { float:left; }
+.fw-wrapper .right { float:right; }
+.fw-wrapper .text-left { text-align:left; }
+.fw-wrapper .text-right { text-align:right; }
+.fw-wrapper .block { display:block; }
+.fw-wrapper .inline-block { display:inline-block; *zoom:1; *display:inline; }
+.fw-wrapper .nolist { list-style:none; }
+.fw-wrapper .nopadding { padding:0 !; }
+.fw-wrapper .nomargin { margin:0; }
+
+/* Grid */
+.fw-wrapper .row { display:block; position:relative; }
+.fw-wrapper .col { margin-left:4%; float:left; position:relative; }
+.fw-wrapper .col:first-child { margin-left:0; }
+.fw-wrapper .one { width: 6.333%; }
+.fw-wrapper .two { width: 14.667%; }
+.fw-wrapper .three { width: 23.0%; }
+.fw-wrapper .four { width: 31.333%; }
+.fw-wrapper .five { width: 39.667%; }
+.fw-wrapper .six { width: 48.0%; }
+.fw-wrapper .seven { width: 56.333%; }
+.fw-wrapper .eight { width: 64.667%; }
+.fw-wrapper .nine { width: 73.0%; }
+.fw-wrapper .ten { width: 81.333%; }
+.fw-wrapper .eleven { width: 89.667%; }
+.fw-wrapper .twelve { width: 100%; } 
+
+/* General */
+.fw-wrapper { font-size:14px; font-size:100%; line-height:1.5; color:#222222; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+.fw-wrapper h1, .fw-wrapper h2, .fw-wrapper h3 { margin-bottom:15px; }
+.fw-wrapper h2 { font-size:14px; }
+.fw-wrapper .widget-box a, .fw-wrapper a:visited { color:#222; text-decoration:underline; }
+.fw-wrapper .widget-box a:hover { color:#000; }
+
+.fw-wrapper .widget-box { display:block; position:relative; padding:15px 20px 10px; margin-bottom:24px; background:#EEEEEE; border-radius:5px; border:1px solid #DFDFDE; }
+.fw-wrapper .widget-box.twitter { padding:10px; }
+.fw-wrapper .fw-title { font-size:14px; font-weight:bold; margin-bottom:15px; line-height:15px; }
+.fw-wrapper .widget-details { clear:both; position:relative; min-height:16px; font-size:11px; line-height:16px; padding-top:5px; margin-top:15px; }
+.fw-wrapper .widget-details .col { line-height:16px; }
+.fw-wrapper .timeago { border-bottom:0; position:absolute; bottom:1px; right:30px; line-height:12px; font-size:11px; }
+.fw-wrapper .refresh-widget { opacity:0.7; filter:opacity(70); width:16px; height:16px; position:absolute; bottom:0; right:0; text-indent:-9999px; background:url(images/refresh.png); cursor:pointer; }
+.fw-wrapper .refresh-widget:hover { opacity:1.0; }
+
+.refresh-widget.refreshing { -webkit-animation:spin 1s infinite linear; -moz-animation:spin 1s infinite linear; -o-animation:spin 1s infinite linear; -ms-animation:spin 1s infinite linear; }
+@-webkit-keyframes spin { 0% { -webkit-transform:rotate(0deg);} 100% { -webkit-transform:rotate(360deg);} }
+@-moz-keyframes spin { 0% { -moz-transform:rotate(0deg);} 100% { -moz-transform:rotate(360deg);} }
+@-o-keyframes spin { 0% { -o-transform:rotate(0deg);} 100% { -o-transform:rotate(360deg);} }
+@-ms-keyframes spin { 0% { -ms-transform:rotate(0deg);} 100% { -ms-transform:rotate(360deg);} }
+
+/* Fire Danger Level Widget */
+.fw-wrapper .fdr { margin-bottom:15px; text-align:center; }
+.fw-wrapper .fdr_links { display:none; } /* Links for other days disabled. Seperate Forecast Widget. */
+
+.fw-wrapper .fdr .danger-level { border-radius:4px; padding:20px 25px; line-height:30px; font-size:28px; font-weight:700; text-transform:uppercase; display:inline-block; text-align:center; margin:0 auto; }
+.fw-wrapper .fdr-codered .danger-level { background:#FB1309 url(images/code-red.png); color:#fff; }
+.fw-wrapper .fdr-extreme .danger-level { background:#ff6666; background:-moz-linear-gradient(top, #ff6666 0%, #ff0000 100%); background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff6666), color-stop(100%,#ff0000)); background:-webkit-linear-gradient(top, #ff6666 0%,#ff0000 100%); background:-o-linear-gradient(top, #ff6666 0%,#ff0000 100%); background:-ms-linear-gradient(top, #ff6666 0%,#ff0000 100%); background:linear-gradient(to bottom, #ff6666 0%,#ff0000 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6666', endColorstr='#ff0000',GradientType=0 ); } .fw-wrapper .fdr-severe .danger-level {
+background:#e8c265; background:-moz-linear-gradient(top, #e8c265 0%, #ca722b 100%); background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8c265), color-stop(100%,#ca722b)); background:-webkit-linear-gradient(top, #e8c265 0%,#ca722b 100%); background:-o-linear-gradient(top, #e8c265 0%,#ca722b 100%); background:-ms-linear-gradient(top, #e8c265 0%,#ca722b 100%); background:linear-gradient(to bottom, #e8c265 0%,#ca722b 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8c265', endColorstr='#ca722b',GradientType=0 ); }
+.fw-wrapper .fdr-veryhigh .danger-level { background:#ffb920; background:-moz-linear-gradient(top, #ffb920 0%, #ffde45 100%); background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffb920), color-stop(100%,#ffde45)); background:-webkit-linear-gradient(top, #ffb920 0%,#ffde45 100%); background:-o-linear-gradient(top, #ffb920 0%,#ffde45 100%); background:-ms-linear-gradient(top, #ffb920 0%,#ffde45 100%); background:linear-gradient(to bottom, #ffb920 0%,#ffde45 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb920', endColorstr='#ffde45',GradientType=0 ); }
+.fw-wrapper .fdr-high .danger-level { background:#94caee; background:-moz-linear-gradient(top, #94caee 0%, #4085d8 100%); background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#94caee), color-stop(100%,#4085d8)); background:-webkit-linear-gradient(top, #94caee 0%,#4085d8 100%); background:-o-linear-gradient(top, #94caee 0%,#4085d8 100%); background:-ms-linear-gradient(top, #94caee 0%,#4085d8 100%); background:linear-gradient(to bottom, #94caee 0%,#4085d8 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#94caee', endColorstr='#4085d8',GradientType=0 ); }
+.fw-wrapper .fdr-lowtomoderate .danger-level { background:green; }
+.fw-wrapper .fdr-low-moderate .danger-level { background:#c1d36f; background:-moz-linear-gradient(top, #c1d36f 0%, #709a30 100%); background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#c1d36f), color-stop(100%,#709a30)); background:-webkit-linear-gradient(top, #c1d36f 0%,#709a30 100%); background:-o-linear-gradient(top, #c1d36f 0%,#709a30 100%); background:-ms-linear-gradient(top, #c1d36f 0%,#709a30 100%); background:linear-gradient(to bottom, #c1d36f 0%,#709a30 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#c1d36f', endColorstr='#709a30',GradientType=0 ); }
+.fw-wrapper .fdr-noforecast .danger-level { background:gray; font-size:24px; }
+
+/* Forecast */
+.fw-wrapper .fire-forecast .col.six { height:40px; line-height:40px; font-size:17px; margin-bottom:8px; }
+.fw-wrapper .fire-forecast .fdr .danger-level { font-size:15px; padding:5px; display:block; }
+.fw-wrapper .fire-forecast .fw-noforecast .danger-level { font-size:12px; }
+.fw-wrapper .fire-forecast>.row:last-child>.col { margin-bottom:0; }
+
+/* Current Weather Widget */
+.fw-wrapper .temperature-title { font-size:57px; line-height:57px; font-weight:bold; margin:0; letter-spacing:-1px; }
+.fw-wrapper .wind-title { font-size:30px; line-height:30px; margin-top:10px; margin-bottom:15px; font-weight:400; letter-spacing:-1px; }
+
+/* FDR Chart Widget */
+.fw-wrapper .chart-widget { background-color:#fff; }
+.fw-wrapper .chart-widget:hover { box-shadow:inset 0 0 0 1px #ccc; }
+.fw-wrapper .chart-widget span { display:block; text-align:center; font-weight:800; margin:9px -20px 4px; font-size:11px; }
+.fw-wrapper .chart-widget br { display:none; }
+
+/* Widget Box Button */
+.widget-box.button-style { margin-bottom:10px; display:block; font-weight:bold; background:#fff; border:2px solid #DCDCDC; padding:15px 20px 15px 10px; text-align:center; font-size:16px; line-height:20px; }
+.widget-box.button-style .col { height:40px; }
+.widget-box.button-style.vic-roads .button-bg { background:url(images/vic-roads.jpg) no-repeat center center; background-size:100%; }
+.widget-box.button-style.cfa { background:#fff url(images/cfa.jpg) 35px 6px no-repeat; background-size:60px 60px ; }
+
+.fw-wrapper .below-twitter { padding:10px 10px 0; line-height:1.5; font-size:13px; }
+.fw-wrapper .below-twitter .yellow-button { background:#FFC70F; font-weight:700; font-size:15px; line-height:18px; padding:10px 15px; margin-top:10px; display:inline-block; text-decoration:none; }
+
+/* Responsiveness */
+@media screen and (max-width:767px) {
+  .fw-wrapper .widget-box { padding:10px; }
+  .fw-wrapper .timeago { right:25px; }
+}
+@media screen and (max-width:560px) {
+  .fw-wrapper>.row>.col { width:100%; }
+}
