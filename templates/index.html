@@ -1,96 +1,25 @@
 <html>
   <head>
-    <title>Latrobe Valley Firewatch Dashboard</title>
+    <title>Firewatch Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.simpleWeather.js') }}"></script>
   </head>
   <body>
-  <h1>Latrobe Valley Firewatch Dashboard</h1>
-  <div class="fw-wrapper">
-    <div class="row">
-      <div class="col six">
-        <div class="widget-box">
-          <h2>Current Fire Danger Rating</h2>
-          <div class="widget-data" style="display: block;"><div class="fdr fdr-{{ today.ratingcode }}"><span class="danger-level">{{ today.rating }}</span></div></div>
-        </div>
-        <div class="widget-box">
-          <h2>Current Weather Conditions</h2>
-          <div class="weather_forecast"></div>
-          <script>
-            jQuery.simpleWeather({
-              woeid: '{{ data.woeid }}',
-              unit: '{{ temperature_unit }}',
-              location: '',
-              zipcode: '',
-              success: function(weather) {
-                html = '<h3 class="temperature-title">'+weather.temp+'&deg;'+weather.units.temp+'</h3>';
-                html += '<h4 class="wind-title">'+weather.wind.direction+' '+weather.wind.speed+'km/h</h4>';
-
-                jQuery(".weather_forecast").html(html);
-              },
-              error: function(error) {
-                jQuery(".weather_forecast").html('<p>'+error+'</p>');
-              }
-            });
-          </script>
-        </div>
-        <div class="widget-box">
-          <h2>Fire Danger Rating Forecast</h2>
-          <div class="widget-data fire-forecast">
-            {% for day, forecast in danger_forecast.iteritems() %}      
-              <div class="row">
-                  <div class="col six">
-                      {{forecast.short_date}}: 23°C
-                  </div>
-                  <div class="col six text-right">
-                      <div class="fdr fdr-{{forecast.ratingcode}}">
-                          <span class="danger-level">{{forecast.rating}}</span>
-                      </div>
-                  </div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="widget-box chart-widget" style="background: none repeat scroll 0 0 #fff">
-          <a href="http://www.cfa.vic.gov.au/warnings-restrictions/about-fire-danger-ratings/" target="_blank"><br />
-            <img alt="" src="http://www.cfa.vic.gov.au/fm_files/img/warnings-restrictions/fdr-chart.gif" width="98%" /><br />
-            <span>CFA Website – Info About Fire Danger Ratings</span><br>
-          </a>
-        </div>
-      </div>
-      <div class="col six">
-        <div class="widget-box twitter">
-          <h2>Twitter</h2>
-          <div class="below-twitter">The information in the Twitter feed above is sourced from members of the community. Use it only as one of many sources of information to assist your decision making.<br>
-             <a class="yellow-button" href="http://www.aurora.asn.au/fire-watch/information-on-twitter/">Information &amp; Instructions</a>
+    <h1>Firewatch Dashboard</h1>
+    <div class="fw-wrapper">
+      <div class="row">
+        <div class="col six">
+          <div class="widget-box">
+            {% if error %}
+              {{ error }}
+            {% endif %}
+            <h2>Enter a Postcode</h2>
+            <form id="postcode-form" method="POST" action="/">
+              <input type="text" id="postcode" name="postcode"/> 
+              <input type="submit" value="Go" /> 
+            </form>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="row cfa-buttons">
-      <div class="col six">
-        <div>
-          <a class="widget-box button-style vic-roads" target="_blank" href="http://alerts.vicroads.vic.gov.au{{ data.vicroads}}">
-            <div class="col six button-bg">&nbsp;</div>
-            <div class="col six button-content">Closures &amp; <br>Traffic Alerts</div>
-            <div class="clear"></div>
-          </a>
-        </div>
-      </div>  
-      <div class="col six">
-        <div>
-          <a class="widget-box button-style cfa" target="_blank" href="http://www.cfa.vic.gov.au/warnings-restrictions/warnings-and-incidents/">
-            <div class="col four button-bg">&nbsp;</div>
-            <div class="col eight button-content">Warnings &amp; <br>Incident Updates</div>
-            <div class="clear"></div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
   </body>
 </html>
-
-    

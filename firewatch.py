@@ -1,6 +1,6 @@
 import os, requests, re, dateutil.parser, sqlite3
 import xml.etree.ElementTree as ET
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.routing import BaseConverter
 from bs4 import BeautifulSoup
 from collections import OrderedDict
@@ -16,6 +16,22 @@ utf8_parser = ET.XMLParser(encoding='utf-8')
 
 app.url_map.converters['regex'] = RegexConverter
 
+@app.route('/', methods=['GET', 'POST'])
+def index():
+  if request.method=='POST':
+    if request.form['postcode']:
+      conn = sqlite3.connect('postcodes.sqlite')
+      conn.row_factory = sqlite3.Row #Return rows as dicts
+      c = conn.cursor()
+      c.execute("SELECT * from postcodes WHERE postcode = %s"%request.form['postcode'])
+      result = c.fetchone()
+      if result is None:
+        return render_template("index.html", error = 'Postcode not found. Please enter a valid Victorian postcode')
+      else:
+        return redirect(url_for('main',postcode=result['postcode']))
+  else:
+    return render_template("index.html")
+
 @app.route('/<regex("[0-9]{4}"):postcode>/')
 def main(postcode):
   conn = sqlite3.connect('postcodes.sqlite')
@@ -28,7 +44,7 @@ def main(postcode):
   else:
     forecast = OrderedDict(sorted(danger_rating(result['cfa_district_url']).items()))
     today_date, today_conditions  = forecast.popitem(last=False)
-    return render_template("index.html",
+    return render_template("dashboard.html",
       danger_forecast = forecast,
       today = today_conditions,
       data = result,
@@ -69,3 +85,5 @@ def get_danger(text, district):
   else:
     return ('error','Error Getting Forecast')
 
+if __name__ == '__main__':
+    app.run()
