@@ -9,7 +9,7 @@ The dashboard for a postcode is accessed by appending the postcode to the main u
 For example, to get to the dashboard for Churchill(3842) you would visit
 ```
 127.0.0.1:5000/3842/
-``
+```
 A basic index page with a textbox input is also included
 
 ## Installation ##
